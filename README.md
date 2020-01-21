@@ -1,2 +1,2 @@
 # longest-word
-* longest-word test
+* longest-word tests using Travis CI

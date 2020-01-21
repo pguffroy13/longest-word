@@ -25,10 +25,5 @@ class Game:
     def __check_dictionary(self,word):
         r = requests.get('https://wagon-dictionary.herokuapp.com/' + word)
         response = r.json()
-
-        print('STATUS_CODE:', r.status_code)
-        print('TEXT:', r.text)
-        print('JSON:', r.json)
-
         return response['found']
 

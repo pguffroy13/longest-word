@@ -2,7 +2,7 @@
 # pylint: disable=too-few-public-methods
 import string
 import random
-
+import requests
 
 class Game:
 
@@ -10,7 +10,6 @@ class Game:
         self.grid = []
         for _ in range(9):
             self.grid.append(random.choice(string.ascii_uppercase))
-        print(self.grid)
 
     def is_valid(self, word):
         if not word:
@@ -21,4 +20,15 @@ class Game:
                 letters.remove(letter)
             else:
                 return False
-        return True
+        return self.__check_dictionary(word)
+
+    def __check_dictionary(self,word):
+        r = requests.get('https://wagon-dictionary.herokuapp.com/' + word)
+        response = r.json()
+
+        print('STATUS_CODE:', r.status_code)
+        print('TEXT:', r.text)
+        print('JSON:', r.json)
+
+        return response['found']
+
